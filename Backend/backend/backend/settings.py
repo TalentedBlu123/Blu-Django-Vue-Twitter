@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'graphene_django',
+    'ckeditor',
+    'ckeditor_uploader',
     'corsheaders',
 ]
 
@@ -138,4 +140,15 @@ AUTH_USER_MODEL = 'blog.User'
 # Configure GraphQL
 GRAPHENE = {
     "SCHEMA": "blog.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+# CKEditor
+CKEDITOR_UPLOAD_PATH = "posts/uploads/%Y/%m/%d/"
